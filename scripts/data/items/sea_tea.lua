@@ -53,26 +53,6 @@ function item:getBattleText(user, target)
     return "* "..user.chara:getName().." used the "..self:getUseName().."! Speed increases for one turn!"
 end
 
-
---[[function item:getBattleText(user, target)
-    return "* "..user.chara.." drank the Sea Tea.\n* Your SPEED boosts for one turn!"
-end]]
-
---[[function item:onLightBattleUse(user, target)
-    if Game.battle.soul.speed < 8 then
-        Game.battle.soul.speed = Game.battle.soul.speed + 1
-    end
-    self:battleUseSound(user, target)
-
-    local amount = self:getBattleHealAmount(target.chara.id)
-    for _,equip in ipairs(user.chara:getEquipment()) do
-        amount = equip:applyHealBonus(amount)
-    end
-    target:heal(amount)
-    Game.battle:battleText(self:getLightBattleText(user, target).."\n"..self:getLightBattleHealingText(user, target, amount))
-    return true
-end]]
-
 function item:onBattleUse(user, target)
 
      if Game.battle.soul_speed_bonus < 1 then
@@ -81,13 +61,7 @@ function item:onBattleUse(user, target)
     end
     self:battleUseSound(user, target)
 
-
-    --Assets.stopAndPlaySound("speedup")
-
-    local amount = self:getBattleHealAmount(target.chara.id)
-    --[[for _,equip in ipairs(user.chara:getEquipment()) do
-        amount = equip:applyHealBonus(amount)
-    end]]
+    local amount = self:getBattleHealAmount(target.chara.id)   
     target:heal(amount)
     return true
 end
